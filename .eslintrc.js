@@ -14,6 +14,9 @@ module.exports = {
   rules: {
     'semi': 'off',
     'comma-dangle': 'off',
-    'linebreak-style': 'off'
+    'linebreak-style': 'off',
+    'require-jsdoc': 'off',
+    'arrow-parens': 'off',
+    'operator-linebreak': 'off'
   }
 }
