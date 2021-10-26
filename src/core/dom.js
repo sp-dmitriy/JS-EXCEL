@@ -4,7 +4,16 @@ class Dom {
     ? document.querySelector(selector)
     : selector
   }
-
+  text(text) {
+    if (typeof text === 'string') {
+      this.$el.textContent = text
+      return this
+    }
+    if (this.$el.tagName.toLowerCase() === 'input') {
+      return this.$el.value.trim()
+    }
+    return this.$el.textContent.trim()
+  }
   html(html) {
     if (typeof html === 'string') {
       this.$el.innerHTML = html
@@ -23,6 +32,10 @@ class Dom {
 
   off(eventType, callback) {
     this.$el.removeEventListener(eventType, callback)
+  }
+
+  find(selector) {
+    return $(this.$el.querySelector(selector))
   }
 
   append(node) {
@@ -57,6 +70,28 @@ class Dom {
     Object.keys(styles).forEach(key => {
       this.$el.style[key] = styles[key]
     })
+  }
+  id(parse) {
+    if (parse) {
+      const parsed = this.id().split(':')
+      return {
+        row: +parsed[0],
+        col: +parsed[1]
+      }
+    }
+    return this.data.id
+  }
+  focus() {
+    this.$el.focus()
+    return this
+  }
+  addClass(className) {
+    this.$el.classList.add(className)
+    return this
+  }
+  delClass(className) {
+    this.$el.classList.remove(className)
+    return this
   }
 }
 
